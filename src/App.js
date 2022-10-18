@@ -16,7 +16,7 @@ function App() {
       <RowPoster title = 'Netflix Originals' url={originalsUrl}/>
       <RowPoster title='Action' isSmall url={actionsUrl}/> 
       <RowPoster title='Comedies' isSmall url={comediesUrl}/> 
-      {/* <RowPoster title='Documentaries' isSmall url={DocumentariesUrl}/>  */}
+      <RowPoster title='Documentaries' isSmall url={DocumentariesUrl}/> 
     </div>
   );
 }
