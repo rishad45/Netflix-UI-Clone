@@ -17,13 +17,14 @@ function RowPoster(props) {
     const [utubeKey, setutubeKey] = useState("")
 
     // state for mouse hovering
-    const [isHovering, setIsHovering] = useState(false)
+    const [isHovering, setIsHovering] = useState('')
 
     useEffect(() => {
         axios.get(props.url).then((res) => {
             console.log("originals", res.data.results);
-            setMovies(res.data.results)
+            setMovies(res.data.results) 
         })
+        console.log("hello"); 
     }, [])
 
     // function to find utube video id
@@ -41,13 +42,14 @@ function RowPoster(props) {
     }
 
     // function for Hovering
-    const handleMouseOver = () => {
-        setIsHovering(true)
+    const handleMouseOver = (id) => { 
+        console.log(id);
+        setIsHovering(id)  
     }
 
     // function for mouse out
     const handleMouseOut = () => {
-        setIsHovering(false)
+        setIsHovering('') 
     }
 
     // react-youtube options
@@ -66,9 +68,9 @@ function RowPoster(props) {
             <div className="posters">
                 {
                     movies.map((i) => {
-                        return <div className='imageBox'>
-                            <img onMouseOver={handleMouseOver} onMouseOut={handleMouseOut} onClick={() => { movieTrailers(i.id) }} src={`${imageUrl + i.backdrop_path}`} alt="Card" className={props.isSmall ? 'smallPoster' : 'poster'} />
-                            {isHovering && <div className='tag'>
+                        return <div className='imageBox' key={i.id}>
+                            <img onMouseOver={()=>handleMouseOver(i.id)} onMouseOut={handleMouseOut} onClick={() => { movieTrailers(i.id) }} src={`${imageUrl + i.backdrop_path}`} alt="Card" className={props.isSmall ? 'smallPoster' : 'poster'} />
+                            {isHovering===i.id && <div className='tag'>
                                 <p className='movieName'>{i.title ? i.title : i.name}</p> 
                                 <p>{i.vote_average}</p>
                             </div>
